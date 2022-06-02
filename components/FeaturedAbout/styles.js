@@ -30,7 +30,7 @@ export default css`
 
     @media (max-width: ${breakpoints.mobile}) {
         h2 {
-            margin-top: 40px;
+            margin-top: 30px;
         }
         h3 {
             display: none;

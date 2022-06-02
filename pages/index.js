@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
 import Header from '../components/Header'
 import FeaturedProduct from '../components/FeaturedProduct'
+import ProductList from '../components/ProductList'
 
 export default function Home() {
 
@@ -17,7 +17,8 @@ export default function Home() {
       <AppLayout>
         <Header />
         <FeaturedProduct />
-        <h1>
+        <ProductList />
+        {/* <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
         <nav>
@@ -26,7 +27,7 @@ export default function Home() {
               timeline
             </a>
           </Link>
-        </nav>
+        </nav> */}
       </AppLayout>
 
       <style jsx>{`
