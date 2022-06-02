@@ -28,5 +28,9 @@ export default css`
         img {
             width: 32px;
         }
+        
+        button {
+            margin-right: 33px;
+        }
     }
 `

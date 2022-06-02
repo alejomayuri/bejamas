@@ -3,18 +3,24 @@ import css from 'styled-jsx/css';
 import { breakpoints } from "../../styles/theme"
 
 export default css`
-    header {
+   header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 2px solid #000;
-        padding: 33px 0;
+    }
+    div {
+        width: 257px;
+    }
+    h1 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 34.82px;
+        font-family: 'Archivo', sans-serif;
     }
 
     @media (max-width: ${breakpoints.mobile}) {
-        img {
-            width: 124px;
-            margin-left: 33px;
+        div {
+            display: none;
         }
     }
 `

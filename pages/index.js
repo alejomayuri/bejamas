@@ -2,22 +2,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import AppLayout from '../components/AppLayout'
 import Header from '../components/Header'
-import { useEffect, useState } from 'react'
-
-import { getFirestore } from '../firebase/client'
+import FeaturedProduct from '../components/FeaturedProduct'
 
 export default function Home() {
-  const [products, setProducts] = useState([])
-  const dbQuery = getFirestore()
-  const traer = dbQuery.collection('products')
-  useEffect(() => {
-    traer.get().then(({ docs }) => {
-      setProducts(
-        docs.map(doc => ({ id: doc.id, ...doc.data() })))
-    })
-  }, [])
-  
-  console.log(products)
 
   return (
     <div>
@@ -29,6 +16,7 @@ export default function Home() {
 
       <AppLayout>
         <Header />
+        <FeaturedProduct />
         <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

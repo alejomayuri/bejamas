@@ -1,5 +1,4 @@
 import firebase from 'firebase/compat/app';
-// import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 export const app = firebase.initializeApp({
@@ -11,16 +10,19 @@ export const app = firebase.initializeApp({
     appId: "1:252586330854:web:ae9e318a5796d28b810927"
 })
 
-// firebase.initializeApp(firebaseConfig);
+function getFirestore() {
+    return firebase.firestore(app).collection('products')
+}
 
-// export const loginWithGitHub = () => {
-//     const provider = new firebase.auth.GithubAuthProvider();
-//     firebase.auth().signInWithPopup(provider);
-// }
-
-// export const productsRef = firebase.firestore()
-export function getFirestore() {
-
-    return firebase.firestore(app)
-    // return firebase.auth.GoogleAuthProvider(googleProvider)
+export const getProducts = () => {
+    return getFirestore().get().then(snapshot =>{
+        return snapshot.docs.map(doc => {
+            const data = doc.data()
+            const id = doc.id
+            return {
+                id,
+                ...data
+            }
+        })
+    })
 }
