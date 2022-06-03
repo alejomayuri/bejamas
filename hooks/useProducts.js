@@ -1,80 +1,67 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Context } from "../context/ProductsProvider";
-
-const DEFAULT_SORT_VALUE = {
-    on: "down",
-    off: null
-}
+import useFilterByCategories from "./useFilterByCategories";
+import useFilterByPrice from "./useFiltersByPrice";
+import useSortProducts from "./useSortProducts";
+import useCategories from "./useCategories";
 
 export default function useProduscts() {
 
     const { products } = useContext(Context)
 
-    const [sortTypeByPrice, setSortTypeByPrice] = useState(DEFAULT_SORT_VALUE.on)
-    const [sortTypeByName, setSortTypeByName] = useState(DEFAULT_SORT_VALUE.off)
+    const [sortedProducts, setSortedProducts] = useState([])
+    const [type, setType] = useState(true)
+    const [direction, setDirection] = useState(true)
+    const [categoryFilters, setFilters] = useState([])
+    const [priceFilters, setPriceFilters] = useState([])
 
-    function dynamicSort(property) {
-        var sortOrder = 1;
-    
-        if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
-        }
-    
-        return function (a,b) {
-            if(sortOrder == -1){
-                return b[property].localeCompare(a[property]);
-            }else{
-                return a[property].localeCompare(b[property]);
-            }        
-        }
-    }
+    const { filterByCategory } = useFilterByCategories({categoryFilters})
+    const { filterByPrice } = useFilterByPrice({priceFilters})
+    const { sortBy } = useSortProducts()
+    const { categories } = useCategories()
 
-    const sortUpAndDown = (f) => {
-        if (sortTypeByPrice === 'up') {
-            return f.sort((a, b) => b.price - a.price)
-        } else if (sortTypeByPrice  === 'down') {
-            return f.sort((a, b) => a.price - b.price)
-        }
-        if (sortTypeByName === 'up') {
-            return f.sort(dynamicSort("name")).reverse()
-        } else if (sortTypeByName  === 'down') {
-            return f.sort(dynamicSort("name"))
-        }
-        
-        return f
-    }
+    useEffect(() => {
+        setDirection(true)
+    }, [type])
 
-    const handleSelect = (e) => {
+    const handleOnSelectCategory = (e) => {
         const { value } = e.target
-        if (value === 'price') {
-            setSortTypeByName(DEFAULT_SORT_VALUE.off)
-            setSortTypeByPrice(DEFAULT_SORT_VALUE.on)
+        if (categoryFilters.includes(value)) {
+            setFilters(categoryFilters.filter(filter => filter !== value))
         } else {
-            setSortTypeByPrice(DEFAULT_SORT_VALUE.off)
-            setSortTypeByName(DEFAULT_SORT_VALUE.on)
+            setFilters([...categoryFilters, value])
         }
     }
 
-    const handleChangeSort = () => {
-        if (sortTypeByPrice === 'up') {
-            setSortTypeByPrice('down')
-        } else if (sortTypeByPrice === 'down') {
-            setSortTypeByPrice('up')
-        }
-
-        if (sortTypeByName === 'up') {
-            setSortTypeByName('down')
-        } else if (sortTypeByName === 'down') {
-            setSortTypeByName('up')
+    const handleOnSelectRange = (e) => {
+        const { value } = e.target
+        if (priceFilters.includes(value)) {
+            setPriceFilters([])
+            const element = document.querySelectorAll(`input[name='range']:checked`)
+            element.forEach(el => el.checked = false)
+        } else {
+            setPriceFilters([value]) 
         }
     }
 
-    const sortedProducts = sortUpAndDown(products)
-    
+    useEffect(() => {
+        setSortedProducts(
+            filterByPrice(
+                filterByCategory(
+                    sortBy(products.map(product => product), type, direction)
+                )
+            )
+        )
+    }, [products, type, direction, categoryFilters, priceFilters])
+
     return {
         sortedProducts,
-        handleSelect,
-        handleChangeSort
+        categories,
+        type,
+        direction,
+        setType,
+        setDirection,
+        handleOnSelectCategory,
+        handleOnSelectRange
     };
 }

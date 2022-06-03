@@ -31,8 +31,8 @@ export default function FeaturedProduct() {
                         <AlsoBuy />
                         <FeaturedDetails
                             details={featuredProduct.details}
-                            widthDiemension={featuredProduct.details?.dimentions?.width}
-                            HeightDimension={featuredProduct.details?.dimentions?.height}
+                            widthDiemension={featuredProduct.details?.dimension?.width}
+                            HeightDimension={featuredProduct.details?.dimension?.height}
                             size={featuredProduct.details?.size}
                         />
                     </div>
