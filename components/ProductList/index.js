@@ -14,8 +14,11 @@ export default function ProductList() {
         handleOnSelectCategory,
         setType,
         setDirection,
-        handleOnSelectRange
+        handleOnSelectRange,
+        products
     } = useProduscts()
+
+    console.log(products)
 
     const RANGES = ['first', 'second', 'third', 'fourth']
 

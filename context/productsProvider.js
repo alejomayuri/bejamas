@@ -1,5 +1,5 @@
 import {createContext, useEffect, useState } from "react";
-import { getProducts } from "../firebase/client";
+import getProducts from "../services/getProducts";
 
 const Context = createContext()
 
@@ -8,7 +8,8 @@ const ProductsProvider = ({children}) => {
 
     useEffect(() => {
         getProducts().then(products => {
-            setProducts(products.filter(product => !product.featured))
+            // setProducts(products.filter(product => !product.featured))
+            setProducts(products)
         })
     }, [])
 

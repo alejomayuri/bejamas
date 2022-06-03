@@ -10,7 +10,7 @@ export const app = firebase.initializeApp({
     appId: "1:252586330854:web:ae9e318a5796d28b810927"
 })
 
-function getFirestore() {
+export function getFirestore() {
     return firebase.firestore(app).collection('products')
 }
 

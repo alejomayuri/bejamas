@@ -15,8 +15,8 @@ export default function useProduscts() {
     const [categoryFilters, setFilters] = useState([])
     const [priceFilters, setPriceFilters] = useState([])
 
-    const { filterByCategory } = useFilterByCategories({categoryFilters})
-    const { filterByPrice } = useFilterByPrice({priceFilters})
+    const { filterByCategory } = useFilterByCategories({ categoryFilters })
+    const { filterByPrice } = useFilterByPrice({ priceFilters })
     const { sortBy } = useSortProducts()
     const { categories } = useCategories()
 
@@ -40,17 +40,29 @@ export default function useProduscts() {
             const element = document.querySelectorAll(`input[name='range']:checked`)
             element.forEach(el => el.checked = false)
         } else {
-            setPriceFilters([value]) 
+            setPriceFilters([value])
         }
     }
 
+    const limitProducts = (products, bot, top) => {
+        // const { limit } = useContext(Context)
+        return products.slice(bot, top)
+    }
+
+    const ELEMENTS_PER_PAGE = 6
+
+    const [bot, setBot] = useState(0)
+    const [top, setTop] = useState(ELEMENTS_PER_PAGE)
+
     useEffect(() => {
         setSortedProducts(
-            filterByPrice(
-                filterByCategory(
-                    sortBy(products.map(product => product), type, direction)
+            limitProducts(
+                filterByPrice(
+                    filterByCategory(
+                        sortBy(products.map(product => product), type, direction)
+                    )
                 )
-            )
+            , bot, top)
         )
     }, [products, type, direction, categoryFilters, priceFilters])
 
@@ -62,6 +74,7 @@ export default function useProduscts() {
         setType,
         setDirection,
         handleOnSelectCategory,
-        handleOnSelectRange
+        handleOnSelectRange,
+        products
     };
 }
