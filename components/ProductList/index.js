@@ -3,54 +3,57 @@ import useProduscts from "../../hooks/useProducts"
 import ProductListTitle from "../ProductListTitle"
 import ProductListSortHeader from "../ProductListSortHeader"
 import FilterCategory from "../FilterCategory"
+import FilterPrice from "../FilterPrice"
+import PaginationButtons from "../PaginationButtons"
 
 export default function ProductList() {
 
     const {
+        PRODUCTS_PER_PAGE,
+        PAGES,
+        totalProducts,
         sortedProducts,
         categories,
-        type,
-        direction,
+        bot,
+        top,
+        handleNext,
+        handlePrevious,
+        handleGoToPage,
+        handleDirection,
+        handleType,
         handleOnSelectCategory,
-        setType,
-        setDirection,
-        handleOnSelectRange,
-        products
+        handleOnSelectRange
     } = useProduscts()
-
-    console.log(products)
-
-    const RANGES = ['first', 'second', 'third', 'fourth']
 
     return (
         <>
             <header>
                 <ProductListTitle title='Photography' subtitle='Premium Photos' />
-                <ProductListSortHeader onClick={() => setDirection(!direction)} onChange={() => setType(!type)} />
+                <ProductListSortHeader onClick={handleDirection} onChange={handleType} />
             </header>
             <div>
                 <div className="filtersContainer">
                     <FilterCategory categories={categories} onChange={handleOnSelectCategory} />
-                    <div>
-                        <h3>Price range</h3>
-
-                            <div>
-                                {
-                                    RANGES.map(category => (
-                                        <div key={category}>
-                                            <input name='range' id={category} type="radio" value={category} onClick={handleOnSelectRange} />
-                                            <lable htmlFor={category}>{category}</lable>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                    </div>
+                    <FilterPrice onClick={handleOnSelectRange} />
                 </div>
-                <div className="products">
-                    {
-                        sortedProducts &&
-                        sortedProducts.map(product => <Product key={product.id} img={product.image} {...product} />)
-                    }
+                <div className="products__site">
+                    <div className="products">
+                        {
+                            sortedProducts &&
+                            sortedProducts.map(product => <Product key={product.id} img={product.image} {...product} />)
+                        }
+                    </div>
+                    <PaginationButtons
+                        totalProducts={totalProducts}
+                        bot={bot}
+                        top={top}
+                        pages={PAGES}
+                        perPage={PRODUCTS_PER_PAGE}
+                        handlePrevious={handlePrevious}
+                        handleGoToPage={handleGoToPage}
+                        handleNext={handleNext}
+                    />
+
                 </div>
             </div>
 
@@ -65,13 +68,19 @@ export default function ProductList() {
                 .filtersContainer {
                     width: 360px;
                     display: flex;
-                    justify-content: space-between;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                }
+
+                .products__site {
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 .products {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                    width: 900px;
+                    width: 100%;
                 }
             `}</style>
         </>

@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function useSortProducts() {
+
+    const [type, setType] = useState(true)
+    const [direction, setDirection] = useState(true)
 
     function dynamicSort(property) {
         var sortOrder = 1;
@@ -25,5 +30,5 @@ export default function useSortProducts() {
         }
     }
 
-    return { sortBy };
+    return { type, direction, setType, setDirection, sortBy };
 }

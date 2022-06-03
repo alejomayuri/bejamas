@@ -1,4 +1,8 @@
-export default function useFilterByPrice({priceFilters}) {
+import { useState } from "react"
+
+export default function useFilterByPrice() {
+
+    const [priceFilters, setPriceFilters] = useState([])
 
     const filterByPrice = (entrie) => {
         if (priceFilters[0] === 'first') {
@@ -16,5 +20,21 @@ export default function useFilterByPrice({priceFilters}) {
         return entrie
     }
 
-    return { filterByPrice };
+    const handleOnSelectRange = (e) => {
+        const { value } = e.target
+        if (priceFilters.includes(value)) {
+            setPriceFilters([])
+        } else {
+            setPriceFilters([value])
+            const element = document.querySelectorAll(`input[name='range']`)
+            console.log(element)
+            element.forEach(el => {
+                if (el.value !== value) {
+                    el.checked = false
+                }
+            })
+        }
+    }
+
+    return { priceFilters, filterByPrice, handleOnSelectRange };
 }

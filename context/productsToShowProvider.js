@@ -3,21 +3,21 @@ import getProducts from "../services/getProducts";
 
 const Context = createContext()
 
-const ProductsProvider = ({children}) => {
-    const [products, setProducts] = useState([])
+const ProductsToShowProvider = ({children}) => {
+    const [productsToShow, setProductsToShow] = useState([])
 
     useEffect(() => {
         getProducts().then(products => {
-            setProducts(products)
+            setProductsToShow(products)
         })
     }, [])
 
     return (
-        <Context.Provider value={{products, setProducts}}>
+        <Context.Provider value={{productsToShow, setProductsToShow}}>
             {children}
         </Context.Provider>
     )
 
 }
 
-export {ProductsProvider, Context}
+export {ProductsToShowProvider, Context}

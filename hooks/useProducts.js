@@ -4,55 +4,26 @@ import useFilterByCategories from "./useFilterByCategories";
 import useFilterByPrice from "./useFiltersByPrice";
 import useSortProducts from "./useSortProducts";
 import useCategories from "./useCategories";
+import usePagination from "./usePagination";
 
 export default function useProduscts() {
 
     const { products } = useContext(Context)
 
     const [sortedProducts, setSortedProducts] = useState([])
-    const [type, setType] = useState(true)
-    const [direction, setDirection] = useState(true)
-    const [categoryFilters, setFilters] = useState([])
-    const [priceFilters, setPriceFilters] = useState([])
+    const [totalProducts, setTotalProducts] = useState([])
 
-    const { filterByCategory } = useFilterByCategories({ categoryFilters })
-    const { filterByPrice } = useFilterByPrice({ priceFilters })
-    const { sortBy } = useSortProducts()
+    const { categoryFilters, filterByCategory, handleOnSelectCategory } = useFilterByCategories()
+    const { priceFilters, filterByPrice, handleOnSelectRange } = useFilterByPrice()
+    const { type, direction, setType, setDirection, sortBy } = useSortProducts()
     const { categories } = useCategories()
+    const { bot, top, setBot, setTop, handleNext, handlePrevious, handleGoToPage, limitProducts, PRODUCTS_PER_PAGE } = usePagination()
 
     useEffect(() => {
         setDirection(true)
     }, [type])
 
-    const handleOnSelectCategory = (e) => {
-        const { value } = e.target
-        if (categoryFilters.includes(value)) {
-            setFilters(categoryFilters.filter(filter => filter !== value))
-        } else {
-            setFilters([...categoryFilters, value])
-        }
-    }
-
-    const handleOnSelectRange = (e) => {
-        const { value } = e.target
-        if (priceFilters.includes(value)) {
-            setPriceFilters([])
-            const element = document.querySelectorAll(`input[name='range']:checked`)
-            element.forEach(el => el.checked = false)
-        } else {
-            setPriceFilters([value])
-        }
-    }
-
-    const limitProducts = (products, bot, top) => {
-        // const { limit } = useContext(Context)
-        return products.slice(bot, top)
-    }
-
-    const ELEMENTS_PER_PAGE = 6
-
-    const [bot, setBot] = useState(0)
-    const [top, setTop] = useState(ELEMENTS_PER_PAGE)
+    const PAGES = Math.ceil(totalProducts.length / PRODUCTS_PER_PAGE);
 
     useEffect(() => {
         setSortedProducts(
@@ -62,19 +33,46 @@ export default function useProduscts() {
                         sortBy(products.map(product => product), type, direction)
                     )
                 )
-            , bot, top)
+                , bot, top)
+        )
+    }, [products, type, direction, categoryFilters, priceFilters, bot, top])
+
+    useEffect(() => {
+        setTotalProducts(
+            filterByPrice(
+                filterByCategory(
+                    sortBy(products.map(product => product), type, direction)
+                )
+            )
         )
     }, [products, type, direction, categoryFilters, priceFilters])
 
+    const handleDirection = () => {
+        setDirection(!direction)
+        setBot(0)
+        setTop(PRODUCTS_PER_PAGE)
+    }
+
+    const handleType = () => {
+        setType(!type)
+        setBot(0)
+        setTop(PRODUCTS_PER_PAGE)
+    }
+
     return {
+        PRODUCTS_PER_PAGE,
+        PAGES,
+        totalProducts,
         sortedProducts,
         categories,
-        type,
-        direction,
-        setType,
-        setDirection,
+        bot, 
+        top,
+        handleNext,
+        handlePrevious,
+        handleGoToPage,
+        handleDirection,
+        handleType,
         handleOnSelectCategory,
-        handleOnSelectRange,
-        products
+        handleOnSelectRange
     };
 }

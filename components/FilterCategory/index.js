@@ -11,7 +11,7 @@ export default function FilterCategory({ categories, onChange }) {
                     {
                         categories &&
                         categories.map(category => (
-                            <CategoryElement key={category} category={category} onChange={onChange} />
+                            <CategoryElement name={category} key={category} category={category} onChange={onChange} title={category} />
                         ))
                     }
                 </div>
