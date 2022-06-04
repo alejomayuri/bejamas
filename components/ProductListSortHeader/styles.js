@@ -6,7 +6,7 @@ export default css`
     div {
         display: flex;
         align-items: center;
-        width: 200px;
+        width: 215px;
     }
     
     button {
@@ -40,5 +40,27 @@ export default css`
         margin-left: 15px;
         padding-top: 5px;
         cursor: pointer;
+    }
+
+    .mobile__menu {
+        display: none
+    }
+
+    @media (max-width: ${breakpoints.mobile}) {
+        div {
+            display: none;
+        }
+
+        .mobile__menu {
+            display: flex;
+            justify-content: end;
+            width: 80px;
+        }
+
+        .mobile__menu button {
+            height: 30px;
+            width: 40px;
+            margin-right: 22px;
+        }
     }
 `

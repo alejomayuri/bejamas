@@ -65,7 +65,7 @@ export default function useProduscts() {
         totalProducts,
         sortedProducts,
         categories,
-        bot, 
+        bot,
         top,
         handleNext,
         handlePrevious,

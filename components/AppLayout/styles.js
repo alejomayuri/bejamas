@@ -4,7 +4,7 @@ import { breakpoints } from "../../styles/theme"
 
 export default css`
     main {
-        background-color: #f5f5f5;
+        /* background-color: #f5f5f5; */
         margin: 0 auto;
         max-width: 1290px;
         width: 100%;
