@@ -8,9 +8,33 @@ export default css`
         position: relative;
     }
 
-    img {
+    .img__container {
         width: 280px;
         height: 400px;
+        position: relative;
+    }
+
+    .img__container:hover .add__cart {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .add__cart {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 47px;
+        margin: 0;
+        background: red;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
     }
 
     p {
@@ -55,7 +79,7 @@ export default css`
         }
         img {
             width: 100%;
-            height: 502px;
+            height: 100%;
         }
         .bestseller {
             margin: 0;

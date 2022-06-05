@@ -1,15 +1,61 @@
 import styles from "./styles"
+import { useContext, useState } from "react"
+import { Context } from "../../context/cartProvider"
 
 export default function Cart() {
+    const { cartProducts, setCartProducts } = useContext(Context)
 
-    const handleClick = () => console.log('hola')
+    const [openCart, setOpenCart] = useState(false)
 
-    return(
-        <>  
-            <button onClick={handleClick}>
+    const handleCleanCart = () => {
+        setCartProducts([])
+        setOpenCart(false)
+    }
+
+    return (
+        <>
+            <button disabled={cartProducts.length === 0} onClick={() => setOpenCart(!openCart)}>
                 <img src="/cart.png" alt="cart" />
-                <span>1</span>
+                {
+                    cartProducts.length > 0 &&
+                    <span className="number">{cartProducts.length}</span>
+                }
             </button>
+            {
+                openCart &&
+                <div className="open__cart">
+                    <div className="container">
+                        <div className="cart__header">
+                            <button onClick={() => setOpenCart(!openCart)}>
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 2L20 20" stroke="black" stroke-width="4" />
+                                    <path d="M2 20L20 2" stroke="black" stroke-width="4" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div className="cart__container">
+                            {
+                                cartProducts.map(product => (
+                                    <div className="cart__element" key={product.id}>
+                                        <div className="cart__text">
+                                            <p>{product.name}</p>
+                                            <span>{`$${product.price}`}</span>
+                                        </div>
+                                        <img src={product.image} alt={product.name} />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="cart__clear__button">
+                            <div className="cart__clear__button__container">
+                                <button onClick={handleCleanCart}>Clear Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
 
             <style jsx>{styles}</style>
         </>

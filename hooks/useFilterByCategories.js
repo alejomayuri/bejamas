@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useFilterByCategories() {
 
-    const [categoryFilters, setFilters] = useState([])
+    const [categoryFilters, setCategoryFilters] = useState([])
 
     const filterByCategory = (entrie) => {
         if (categoryFilters.length > 0) {
@@ -15,11 +15,11 @@ export default function useFilterByCategories() {
     const handleOnSelectCategory = (e) => {
         const { value } = e.target
         if (categoryFilters.includes(value)) {
-            setFilters(categoryFilters.filter(filter => filter !== value))
+            setCategoryFilters(categoryFilters.filter(filter => filter !== value))
         } else {
-            setFilters([...categoryFilters, value])
+            setCategoryFilters([...categoryFilters, value])
         }
     }
 
-    return { categoryFilters, filterByCategory, handleOnSelectCategory };
+    return { categoryFilters, setCategoryFilters, filterByCategory, handleOnSelectCategory };
 }

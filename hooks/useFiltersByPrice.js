@@ -36,5 +36,5 @@ export default function useFilterByPrice() {
         }
     }
 
-    return { priceFilters, filterByPrice, handleOnSelectRange };
+    return { priceFilters, setPriceFilters, filterByPrice, handleOnSelectRange };
 }

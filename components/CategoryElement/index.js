@@ -5,8 +5,8 @@ export default function CategoryElement({ category, onChange, onClick, name, tit
     return (
         <>
             <div>
-                <input name={name} type="checkbox" value={category} onChange={onChange} onClick={onClick} />
-                <p>{title}</p>
+                <input id={category} name={name} type="checkbox" value={category} onChange={onChange} onClick={onClick} />
+                <label htmlFor={category}>{title}</label>
             </div>
 
             <style jsx>{styles}</style>

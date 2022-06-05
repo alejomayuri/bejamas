@@ -7,8 +7,9 @@ export default css`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 2px solid #000;
+        border-bottom: 4px solid #E4E4E4;
         padding: 33px 0;
+        position: relative;
     }
 
     @media (max-width: ${breakpoints.mobile}) {

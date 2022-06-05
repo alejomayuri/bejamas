@@ -9,7 +9,7 @@ export default css`
     }
 
     img {
-        margin: 0 15px;
+        margin-left: 30px;
     }
 
     @media (max-width: ${breakpoints.mobile}) {

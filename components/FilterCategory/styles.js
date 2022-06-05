@@ -11,7 +11,7 @@ export default css`
     }
 
     .filtersContainer {
-        width: 270px;
+        width: 320px;
     }
 
     div {
@@ -26,8 +26,17 @@ export default css`
     }
 
     @media (max-width: ${breakpoints.mobile}) {
+        h3 {
+            font-size: 34px;
+            padding-left: 33px;
+        }
+
         .container {
             margin: 0;
+        }
+
+        .filtersContainer {
+            padding-left: 70px;
         }
     }
 `

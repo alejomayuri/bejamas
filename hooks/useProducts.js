@@ -13,8 +13,8 @@ export default function useProduscts() {
     const [sortedProducts, setSortedProducts] = useState([])
     const [totalProducts, setTotalProducts] = useState([])
 
-    const { categoryFilters, filterByCategory, handleOnSelectCategory } = useFilterByCategories()
-    const { priceFilters, filterByPrice, handleOnSelectRange } = useFilterByPrice()
+    const { categoryFilters, setCategoryFilters, filterByCategory, handleOnSelectCategory } = useFilterByCategories()
+    const { priceFilters, setPriceFilters, filterByPrice, handleOnSelectRange } = useFilterByPrice()
     const { type, direction, setType, setDirection, sortBy } = useSortProducts()
     const { categories } = useCategories()
     const { bot, top, setBot, setTop, handleNext, handlePrevious, handleGoToPage, limitProducts, PRODUCTS_PER_PAGE } = usePagination()
@@ -67,6 +67,8 @@ export default function useProduscts() {
         categories,
         bot,
         top,
+        setPriceFilters,
+        setCategoryFilters,
         handleNext,
         handlePrevious,
         handleGoToPage,

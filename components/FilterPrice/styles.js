@@ -9,6 +9,10 @@ export default css`
         background-color: #fff;
     }
 
+    .filtersContainer {
+        width: 320px;
+    }
+
     div {
         display: flex;
         flex-direction: column;
@@ -21,9 +25,19 @@ export default css`
     }
 
     @media (max-width: ${breakpoints.mobile}) {
+        h3 {
+            font-size: 34px;
+            padding-left: 33px;
+        }
+
         .container {
             margin: 0;
             height: 100vh;
+            padding-bottom: 200px;
+        }
+
+        .filtersContainer {
+            padding-left: 70px;
         }
     }
 `

@@ -13,13 +13,15 @@ export default function FeaturedProduct() {
 
     const { featuredProduct } = useFeaturedProduct()
 
+    console.log(featuredProduct.id)
+
     return (
         <>
             <section>
                 <FeaturedHeader name={featuredProduct.name} />
                 <FeaturedPhoto name={featuredProduct.name} photo={featuredProduct.image} />
                 <div className="mobileAddToCart">
-                    <AddToCardButton>ADD TO CART</AddToCardButton>
+                    <AddToCardButton productId={featuredProduct.id}>ADD TO CART</AddToCardButton>
                 </div>
                 <div className="container">
                     <FeaturedAbout
@@ -40,6 +42,12 @@ export default function FeaturedProduct() {
             </section>
 
             <style jsx>{`
+                section {
+                    margin-top: 50px;
+                    padding-bottom: 60px;
+                    border-bottom: 4px solid #E4E4E4;
+                    margin-bottom: 30px;
+                }
                 .container {
                     display: flex;
                     justify-content: space-between;

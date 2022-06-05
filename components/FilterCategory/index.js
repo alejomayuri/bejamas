@@ -6,9 +6,9 @@ export default function FilterCategory({ categories, onChange }) {
     return (
         <>
             <div className="container">
-                <div className="filtersContainer">
+                <div>
                     <h3>Category</h3>
-                    <div>
+                    <div className="filtersContainer">
                         {
                             categories &&
                             categories.map(category => (

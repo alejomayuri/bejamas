@@ -3,6 +3,10 @@ import css from 'styled-jsx/css';
 import { breakpoints } from "../../styles/theme"
 
 export default css`
+    div {
+            margin-top: 40px;
+    }
+
     h2 {
         font-style: normal;
         font-weight: 700;
@@ -21,9 +25,6 @@ export default css`
     }
 
     @media (max-width: ${breakpoints.mobile}) {
-        div {
-            margin-top: 40px;
-        }
 
         h2 {
             text-align: left;
