@@ -1,7 +1,7 @@
 import styles from "./styles"
 import { useContext } from "react"
 import { Context } from "../../context/cartProvider"
-import { Context as ProductContext } from "../../context/ProductsProvider"
+import { Context as ProductContext } from "../../context/productsProvider"
 import useFeaturedProduct from "../../hooks/useFeaturedProduct"
 
 export default function AddToCardButton({ children, productId }) {

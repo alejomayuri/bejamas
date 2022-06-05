@@ -1,4 +1,4 @@
-import { Context } from "../context/ProductsProvider";
+import { Context } from "../context/productsProvider";
 import { useContext, useEffect, useState } from "react";
 
 export default function useCategories() {

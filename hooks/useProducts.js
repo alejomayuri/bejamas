@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Context } from "../context/ProductsProvider";
+import { Context } from "../context/productsProvider";
 import useFilterByCategories from "./useFilterByCategories";
 import useFilterByPrice from "./useFiltersByPrice";
 import useSortProducts from "./useSortProducts";
