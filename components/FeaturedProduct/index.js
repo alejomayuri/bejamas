@@ -13,8 +13,6 @@ export default function FeaturedProduct() {
 
     const { featuredProduct } = useFeaturedProduct()
 
-    console.log(featuredProduct.id)
-
     return (
         <>
             <section>
@@ -60,17 +58,19 @@ export default function FeaturedProduct() {
 
                 @media (max-width: ${breakpoints.mobile}) {
                     section {
-                        padding: 0 15px
+                        padding: 0 15px;
+                        margin-top: 0;
+                    }
+                    
+                    .container {
+                        flex-direction: column;
+                        margin-top: 0;
                     }
 
                     .mobileAddToCart {
                         display: block;
                         width: 100%;
                         margin-top: 30px;
-                    }
-
-                    .container {
-                        flex-direction: column;
                     }
                 }
             `}

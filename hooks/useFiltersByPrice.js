@@ -27,7 +27,6 @@ export default function useFilterByPrice() {
         } else {
             setPriceFilters([value])
             const element = document.querySelectorAll(`input[name='range']`)
-            console.log(element)
             element.forEach(el => {
                 if (el.value !== value) {
                     el.checked = false

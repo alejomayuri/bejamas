@@ -18,16 +18,6 @@ export default function Home() {
         <Header />
         <FeaturedProduct />
         <ProductList />
-        {/* <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <nav>
-          <Link href="/timeline">
-            <a>
-              timeline
-            </a>
-          </Link>
-        </nav> */}
       </AppLayout>
 
       <style jsx>{`

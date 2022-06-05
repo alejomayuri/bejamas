@@ -15,8 +15,6 @@ export default function ProductList() {
 
     const { cartProducts } = useContext(Context)
 
-    console.log(cartProducts)
-
     const {
         PRODUCTS_PER_PAGE,
         PAGES,
@@ -110,7 +108,7 @@ export default function ProductList() {
                 }
 
                 .filtersContainer {
-                    width: 360px;
+                    width: 310px;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-start;

@@ -9,10 +9,6 @@ export default css`
         background-color: #fff;
     }
 
-    .filtersContainer {
-        width: 320px;
-    }
-
     div {
         display: flex;
         flex-direction: column;
@@ -38,6 +34,7 @@ export default css`
 
         .filtersContainer {
             padding-left: 70px;
+            width: 320px;
         }
     }
 `

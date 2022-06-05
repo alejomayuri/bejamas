@@ -4,7 +4,7 @@ import AddToCardButton from "../AddToCartButton"
 export default function Product({ id, img, category, name, price, bestseller }) {
     return (
         <>
-            <div>
+            <div className="container">
 
                 <div className="img__container">
                     {

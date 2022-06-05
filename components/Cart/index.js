@@ -3,18 +3,16 @@ import { useContext, useState } from "react"
 import { Context } from "../../context/cartProvider"
 
 export default function Cart() {
-    const { cartProducts, setCartProducts } = useContext(Context)
-
-    const [openCart, setOpenCart] = useState(false)
+    const { cartProducts, setCartProducts, openCartGlobal, setOpenCartGlobal } = useContext(Context)
 
     const handleCleanCart = () => {
         setCartProducts([])
-        setOpenCart(false)
+        setOpenCartGlobal(false)
     }
 
     return (
         <>
-            <button disabled={cartProducts.length === 0} onClick={() => setOpenCart(!openCart)}>
+            <button disabled={cartProducts.length === 0} onClick={() => setOpenCartGlobal(!openCartGlobal)}>
                 <img src="/cart.png" alt="cart" />
                 {
                     cartProducts.length > 0 &&
@@ -22,11 +20,11 @@ export default function Cart() {
                 }
             </button>
             {
-                openCart &&
+                openCartGlobal &&
                 <div className="open__cart">
                     <div className="container">
                         <div className="cart__header">
-                            <button onClick={() => setOpenCart(!openCart)}>
+                            <button onClick={() => setOpenCartGlobal(!openCartGlobal)}>
                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 2L20 20" stroke="black" stroke-width="4" />
                                     <path d="M2 20L20 2" stroke="black" stroke-width="4" />

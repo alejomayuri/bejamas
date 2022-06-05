@@ -36,7 +36,7 @@ export default css`
             display: none;
         }
         p {
-            margin-top: 40px;
+            margin-top: 30px;
         }
     }
 `

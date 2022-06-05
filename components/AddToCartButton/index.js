@@ -5,7 +5,7 @@ import { Context as ProductContext } from "../../context/ProductsProvider"
 import useFeaturedProduct from "../../hooks/useFeaturedProduct"
 
 export default function AddToCardButton({ children, productId }) {
-    const { cartProducts, setCartProducts } = useContext(Context)
+    const { cartProducts, setCartProducts, setOpenCartGlobal } = useContext(Context)
     const { products } = useContext(ProductContext)
     const { featuredProduct } = useFeaturedProduct()
 
@@ -20,6 +20,7 @@ export default function AddToCardButton({ children, productId }) {
             const newCartProducts = cartProducts.filter(product => product.id !== productId)
             setCartProducts([...newCartProducts, productToAdd])
         }
+        setOpenCartGlobal(true)
     }
 
     return (
