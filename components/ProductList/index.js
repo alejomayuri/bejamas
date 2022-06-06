@@ -73,7 +73,9 @@ export default function ProductList() {
                     <div className="products">
                         {
                             sortedProducts &&
-                            sortedProducts.map(product => <Product key={product.id} img={product.image} {...product} />)
+                                sortedProducts.length > 0
+                                ? sortedProducts.map(product => <Product key={product.id} img={product.image} {...product} />)
+                                : <p>No products found</p>
                         }
                     </div>
                     <PaginationButtons

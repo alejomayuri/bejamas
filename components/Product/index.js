@@ -1,7 +1,12 @@
 import styles from "./styles"
 import AddToCardButton from "../AddToCartButton"
+import { useContext } from "react"
+import { Context } from "../../context/cartProvider"
 
 export default function Product({ id, img, category, name, price, bestseller }) {
+
+    const { cartProducts } = useContext(Context)
+
     return (
         <>
             <div className="container">
@@ -15,7 +20,9 @@ export default function Product({ id, img, category, name, price, bestseller }) 
                     }
                     <img src={img} alt={name} />
                     <div className="add__cart">
-                        <AddToCardButton productId={id}>ADD TO CART</AddToCardButton>
+                        <AddToCardButton productId={id} text={
+                            cartProducts.find(product => product.id === id) ? "ON CART" : "ADD TO CART"
+                        } />
                     </div>
                 </div>
 

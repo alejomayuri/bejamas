@@ -5,21 +5,28 @@ import FeaturedAbout from "../FeaturedAbout"
 import AlsoBuy from "../AlsoBuy"
 import FeaturedDetails from "../FeaturedDetails"
 import AddToCardButton from "../AddToCartButton"
+import { useContext } from "react"
+import { Context } from "../../context/cartProvider"
 
 
 import { breakpoints } from "../../styles/theme"
 
 export default function FeaturedProduct() {
 
+    const { cartProducts } = useContext(Context)
+
     const { featuredProduct } = useFeaturedProduct()
+
 
     return (
         <>
             <section>
-                <FeaturedHeader name={featuredProduct.name} />
+                <FeaturedHeader name={featuredProduct.name} id={featuredProduct.id} />
                 <FeaturedPhoto name={featuredProduct.name} photo={featuredProduct.image} />
                 <div className="mobileAddToCart">
-                    <AddToCardButton productId={featuredProduct.id}>ADD TO CART</AddToCardButton>
+                    <AddToCardButton productId={featuredProduct.id} text={
+                        cartProducts.find(product => product.id === featuredProduct.id) ? "ON CART" : "ADD TO CART"
+                    } />
                 </div>
                 <div className="container">
                     <FeaturedAbout

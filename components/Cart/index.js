@@ -32,16 +32,19 @@ export default function Cart() {
                             </button>
                         </div>
                         <div className="cart__container">
+
                             {
-                                cartProducts.map(product => (
-                                    <div className="cart__element" key={product.id}>
-                                        <div className="cart__text">
-                                            <p>{product.name}</p>
-                                            <span>{`$${product.price}`}</span>
+                                cartProducts.length > 0
+                                    ? cartProducts.map(product => (
+                                        <div className="cart__element" key={product.id}>
+                                            <div className="cart__text">
+                                                <p>{product.name}</p>
+                                                <span>{`$${product.price}`}</span>
+                                            </div>
+                                            <img src={product.image} alt={product.name} />
                                         </div>
-                                        <img src={product.image} alt={product.name} />
-                                    </div>
-                                ))
+                                    ))
+                                    : <p>No products in cart</p>
                             }
                         </div>
                         <div className="cart__clear__button">
